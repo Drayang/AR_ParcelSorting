@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context=".CodeScannerFragment">
+
+
+    <com.budiyev.android.codescanner.CodeScannerView
+        android:id="@+id/scanner_view"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        app:autoFocusButtonColor="@android:color/white"
+        app:autoFocusButtonVisible="true"
+        app:flashButtonColor="@android:color/white"
+        app:flashButtonVisible="true"
+        app:frameAspectRatioWidth="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:maskColor="#A1090707" />
+    <ImageButton
+        android:id="@+id/ibtnHorizontal"
+        android:layout_width="54dp"
+        android:layout_height="61dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/for_barcode_size"
+        android:src="@drawable/ic_horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/scanner_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <ImageButton
+        android:id="@+id/ibtnSquare"
+        android:layout_width="52dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/for_qrcode_size"
+        android:src="@drawable/ic_square"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/scanner_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.062" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

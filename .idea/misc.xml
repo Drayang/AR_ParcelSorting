@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/drawable/ic_launcher__1_foreground.xml" value="0.1595" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/layout/activity_main.xml" value="0.396078431372549" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_a_r.xml" value="0.25" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_code_scanner.xml" value="0.20471014492753623" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_id_scanner.xml" value="0.25" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_login.xml" value="0.6" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_login2.xml" value="0.20471014492753623" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_menu.xml" value="0.25" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/AugmentedReality/FYP/AR_ParceLSorting/app/src/main/res/mipmap-anydpi-v26/ic_launcher_1.xml" value="0.1595" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/drawable/ic_home.xml" value="0.1595" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/drawable/ic_horizontal.xml" value="0.214" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/drawable/ic_qr_code_scanner.xml" value="0.16" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_a_r.xml" value="0.17980072463768115" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_code_scanner.xml" value="0.20471014492753623" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_id_scanner.xml" value="0.446676970633694" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_menu.xml" value="0.2" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_parcel_list.xml" value="0.17980072463768115" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/fragment_tracking.xml" value="0.17980072463768115" />
+        <entry key="..\:/Users/Drayang/AndroidStudioProjects/FYP/AR_ParceLSorting/app/src/main/res/layout/list_parcel.xml" value="0.17279411764705882" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

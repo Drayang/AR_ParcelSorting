@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.ar_parcelsorting.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_parcelListFragment"
+            app:destination="@id/parcelListFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_codeScannerFragment"
+            app:destination="@id/codeScannerFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parcelListFragment"
+        android:name="com.example.ar_parcelsorting.ParcelListFragment"
+        android:label="fragment_parcel_list"
+        tools:layout="@layout/fragment_parcel_list" >
+        <action
+            android:id="@+id/action_parcelListFragment_to_trackingFragment"
+            app:destination="@id/trackingFragment" />
+        <action
+            android:id="@+id/action_parcelListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ARFragment"
+        android:name="com.example.ar_parcelsorting.ARFragment"
+        android:label="fragment_a_r"
+        tools:layout="@layout/fragment_a_r" />
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="com.example.ar_parcelsorting.TrackingFragment"
+        android:label="fragment_tracking"
+        tools:layout="@layout/fragment_tracking" />
+    <fragment
+        android:id="@+id/idScannerFragment"
+        android:name="com.example.ar_parcelsorting.IdScannerFragment"
+        android:label="fragment_id_scanner"
+        tools:layout="@layout/fragment_id_scanner" >
+        <action
+            android:id="@+id/action_idScannerFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/codeScannerFragment"
+        android:name="com.example.ar_parcelsorting.CodeScannerFragment"
+        android:label="fragment_code_scanner"
+        tools:layout="@layout/fragment_code_scanner" >
+        <action
+            android:id="@+id/action_codeScannerFragment_to_ARFragment"
+            app:destination="@id/ARFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.ar_parcelsorting.LoginFragment"
+        android:label="fragment_login2"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_idScannerFragment"
+            app:destination="@id/idScannerFragment" />
+        <action
+            android:id="@+id/action_loginFragment2_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+</navigation>
