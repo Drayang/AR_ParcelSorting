@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.room.Room
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
@@ -88,8 +90,9 @@ class CodeScannerFragment : Fragment() {
         setupPermission() //Setup permission
         initCodeScanner(view) // Initialise the code scanner
 
+        /// TODO: Remove this after finish the project
         /** To test whether POST rquest is workable? */
-        postBarcode("SPXMY0001")
+        postBarcode("SPXMY0001", view)
 
     }
 
@@ -110,7 +113,7 @@ class CodeScannerFragment : Fragment() {
 
 
     // Post request - send the scanned barcode to MongoDB in order to retrieve corresponding parcel information
-    private fun postBarcode(parcel_code:String = "SPXMY0001" ) {
+    private fun postBarcode(parcel_code:String = "SPXMY0001" , view: View) {
         var parcelBarcode = Parcel(
             parcelCode = parcel_code
         )
@@ -120,6 +123,13 @@ class CodeScannerFragment : Fragment() {
                 parcel = it
                 val parcelCode = it.parcelCode
 
+                // Data to transfer between fragment
+                val bundle = bundleOf(
+                    "parcelCode" to parcel.parcelCode,
+                )
+
+                Log.i("My","The bundel is ${bundle}")
+
                 /** To check parcel has been recorded inside the database before or not */
                 viewModel.parcels.observe(requireActivity()) {
                     it?.forEach {
@@ -128,15 +138,21 @@ class CodeScannerFragment : Fragment() {
                             Log.i("My", "Enter parcelHasBeenRecorded loop")
                         }
                     }
-                    if (parcelHasBeenRecorded){ // Not record the parcel
+                    if (parcelHasBeenRecorded){ // Parcel recorded before
                         Toast.makeText(activity,"Duplicate parcel! ", Toast.LENGTH_SHORT).show()
                         Log.i("My", "Duplicate parcel")
                         parcelHasBeenRecorded = false
+                        // TODO: Move to ARFragment (havent test out can work or not
+                        view.findNavController().navigate(R.id.action_codeScannerFragment_to_ARFragment,bundle)
                     }
-                    else{
+                    else{ //New parcel that do not store in database yet
                         Log.i("My", "Enter else loop")
                         saveParcelData(parcel) //save parcel information to database using ROOM
                         Toast.makeText(activity,"Parcel Recorded Successfully", Toast.LENGTH_SHORT).show()
+
+                        // TODO: Move to ARFragment (havent test out can work or not
+                        view.findNavController().navigate(R.id.action_codeScannerFragment_to_ARFragment,bundle)
+
                     }
                 }
 
@@ -190,7 +206,7 @@ class CodeScannerFragment : Fragment() {
             decodeCallback = DecodeCallback {
                 activity.runOnUiThread {
 //                    Toast.makeText(activity,"Parcel ${it.text} has been recorded.", Toast.LENGTH_SHORT).show()
-                    postBarcode(it.text) // Do post request to retrieve parcel information from MongoDB
+                    postBarcode(it.text,view) // Do post request to retrieve parcel information from MongoDB
                     Handler().postDelayed({
                         scannerView.performClick() // To refresh the fragment for next scanning
                     }, 5000)
