@@ -34,21 +34,33 @@ class ARFragment : Fragment() {
     data class Model(
         val fileLocation: String,
         val scaleUnits: Float? = null,
-        val placementMode: PlacementMode = PlacementMode.BEST_AVAILABLE
+        val placementMode: PlacementMode = PlacementMode.BEST_AVAILABLE,
+        val parcelCode: String = "SPXMY0001"
     )
 
     val models = listOf(
-        Model("model/parcelSPXMY0072.glb",
+        Model("model/parcelSPXMY0001.glb",
             placementMode = PlacementMode.BEST_AVAILABLE.apply {
                 keepRotation = true
             },
-            scaleUnits = 0.5f
+            scaleUnits = 0.5f,
+            parcelCode = "SPXMY0001"
+
         ),
-//        Model("models/parcelSPXMY0060.glb",
-//            placementMode = PlacementMode.PLANE_HORIZONTAL.apply {
-//                keepRotation = true
-//            },
-//            scaleUnits = 0.5f),
+        Model("model/parcelSPXMY0055.glb",
+            placementMode = PlacementMode.BEST_AVAILABLE.apply {
+                keepRotation = true
+            },
+            scaleUnits = 0.5f,
+            parcelCode = "SPXMY0055"
+        ),
+        Model("model/parcelSPXMY0060.glb",
+            placementMode = PlacementMode.BEST_AVAILABLE.apply {
+                keepRotation = true
+            },
+            scaleUnits = 0.5f,
+            parcelCode = "SPXMY0060"
+        ),
 //        Model(
 //            "https://storage.googleapis.com/ar-answers-in-search-models/static/Tiger/model.glb",
 //            placementMode = PlacementMode.BEST_AVAILABLE.apply {
@@ -92,9 +104,9 @@ class ARFragment : Fragment() {
             loadingView.isGone = !value
         }
 
+//    var model = models[0] // Intialise with first model first
 
-    // Receive the parcelCode received after scanning the parcel code
-//    val parcelCode = requireArguments().getString("parcelCode")
+
 
     /**---------------------------------------------------------------------------------------------*/
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,11 +120,17 @@ class ARFragment : Fragment() {
 
         binding = FragmentARBinding.inflate(inflater,container,false)
 
-
+        //Intialise the view
         sceneView = binding.sceneView
         loadingView = binding.loadingView
-//        sceneView = findViewById(R.id.sceneView)
-//        loadingView = findViewById(R.id.loadingView)
+
+        // Receive the parcelCode received after scanning the parcel code
+        val parcelCode = requireArguments().getString("parcelCode")
+        // TODO: remove after finish project
+        Log.i("My","Manage to receive the parcelCode ${parcelCode}")
+
+        // To find the index of model in the list with the corresponding code
+        modelIndex = findModelIndex(parcelCode)
 
         // Button to add new model from the modelist
         btnNewModel = binding.btnNewModel.apply {
@@ -129,19 +147,6 @@ class ARFragment : Fragment() {
         btnAnchorModel = binding.btnAnchorModel.apply{
             setOnClickListener { placeModelNode() }
         }
-
-//        newModelButton = findViewById<ExtendedFloatingActionButton>(R.id.newModelButton).apply {
-//            // Add system bar margins
-//            val bottomMargin = (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
-//            doOnApplyWindowInsets { systemBarsInsets ->
-//                (layoutParams as ViewGroup.MarginLayoutParams).bottomMargin =
-//                    systemBarsInsets.bottom + bottomMargin
-//            }
-//            setOnClickListener { newModelNode() }
-//        }
-//        placeModelButton = findViewById<ExtendedFloatingActionButton>(R.id.placeModelButton).apply {
-//            setOnClickListener { placeModelNode() }
-//        }
 
         newModelNode()
 
@@ -194,6 +199,18 @@ class ARFragment : Fragment() {
         sceneView.addChild(modelNode!!) //recode the ARmodelNode to our sceneview
         // Select the model node by default (the model node is also selected on tap)
         sceneView.selectedNode = modelNode
+    }
+
+    private fun findModelIndex(parcelCode: String?): Int {
+        var modelIndex = 0
+        // To find the index of model in the list with the corresponding code
+        for (i in models.indices) {
+            if (models[i].parcelCode == parcelCode ){
+                android.util.Log.i("My","${models[i]}")
+                modelIndex = i
+            }
+        }
+        return modelIndex
     }
 
 
