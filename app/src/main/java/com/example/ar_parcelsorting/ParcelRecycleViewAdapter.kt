@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ar_parcelsorting.db.ParcelDB
 
@@ -23,15 +25,6 @@ class ParcelRecycleViewAdapter(
 
     override fun onBindViewHolder(holder: ParcelViewHolder, position: Int) {
         val parcel = parcelList[position]
-        /* In initial example fruit is the string so can directly put*/
-        // holder.myTextView.text = fruit
-
-        /* THen we use data class "Fruit" to display the data*/
-        //holder.myTextView.text = fruit.name
-
-        /* But actually for best practice, the assign name to TextView.text and any other function
-        * should be done in the ViewHolder class
-        */
         holder.bind(parcel,clickListener)
     }
 
@@ -66,6 +59,17 @@ class ParcelViewHolder(private val view: View) : RecyclerView.ViewHolder(view){
 
         view.setOnClickListener{
             clickListener(parcel)
+            val bundle = bundleOf(
+                "parcelCode" to parcel.parcelCode,
+                "parcelX" to parcel.parcelX.toString(),
+                "parcelY" to parcel.parcelY.toString(),
+                "parcelZ" to parcel.parcelZ.toString(),
+                "parcelLength" to parcel.parcelLength.toString(),
+                "parcelWidth" to parcel.parcelWidth.toString(),
+                "parcelHeight" to parcel.parcelHeight.toString(),
+                "parcelOrientation" to parcel.parcelOrientation.toString(),
+            )
+            view.findNavController().navigate(R.id.action_parcelListFragment_to_trackingFragment,bundle)
         }
 
     }

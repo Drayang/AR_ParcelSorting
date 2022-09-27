@@ -1,6 +1,5 @@
 package com.example.ar_parcelsorting
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,9 +10,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.ar_parcelsorting.data.Parcel
-import com.example.ar_parcelsorting.databinding.FragmentLoginBinding
 import com.example.ar_parcelsorting.databinding.FragmentParcelListBinding
 import com.example.ar_parcelsorting.db.ParcelDB
 import com.example.ar_parcelsorting.db.ParcelDatabase
@@ -22,21 +18,10 @@ import com.example.ar_parcelsorting.db.ParcelDatabase
 class ParcelListFragment : Fragment() {
     private lateinit var binding : FragmentParcelListBinding
 
-//    private lateinit var parcelList : ArrayList<Parcel>
-
-//    val parcelList = listOf<Parcel>(
-//        Parcel("Mango",1,2,3,4,5,6),
-//        Parcel("Durian",1,2,3,4,5,6),
-//        Parcel("Apple", 1,2,3,4,5,6),
-//        Parcel("Banana",1,2,3,4,5,6),
-//    )
-
-    //Recycle view [NOT NECESSARY ANYMORE]
-    private lateinit var parcelRecyclerView: RecyclerView
-    private lateinit var adapter:ParcelRecycleViewAdapter
-
     // Set up view model
     private lateinit var viewModel: ParcelViewModel
+
+    private var listItemClicked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,12 +35,12 @@ class ParcelListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentParcelListBinding.inflate(inflater,container,false)
 
         // Update the employee name on the top right corner
-        binding.tvUsername.setText(LoginFragment.employeename)
+        binding.tvUsername.text = LoginFragment.employeename
 
         // Initialise recycler view
         binding.rvParcelList.layoutManager = LinearLayoutManager(this.activity)
@@ -95,14 +80,15 @@ class ParcelListFragment : Fragment() {
         }
     }
 
-    // TODO: click on the parcel will jump to trackingFragment to check the parcel location
     // Function to call when clicking the selected parcel
     private fun listItemClicked(selectedParcel : ParcelDB){
         Toast.makeText(
             this.activity,
-            "Parcel name is ${selectedParcel.parcelCode}",
+            "Parcel ${selectedParcel.parcelCode} is selected.",
             Toast.LENGTH_SHORT
         ).show()
+        listItemClicked = true
+
     }
 
 

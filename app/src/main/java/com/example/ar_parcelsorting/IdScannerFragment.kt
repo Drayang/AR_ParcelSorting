@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -78,15 +79,13 @@ class IdScannerFragment : Fragment() {
             decodeCallback = DecodeCallback {
                 activity.runOnUiThread {
 
-
                     LoginFragment.employeename = it.text //update the employee name with scanned data
                     Toast.makeText(activity, "Welcome ${it.text}.", Toast.LENGTH_SHORT).show() //show the text scanned
-                    Handler().postDelayed({
-                         // Navigate to menu page
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        // Navigate to menu page
                         view.findNavController().navigate(R.id.action_idScannerFragment_to_menuFragment)
-                    }, 2000)
-
-
+                    }, 500)
                 }
             }
 

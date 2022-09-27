@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.room.Room
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
@@ -31,7 +31,6 @@ import com.example.ar_parcelsorting.service.ParcelService
 import com.example.ar_parcelsorting.service.ParcelServiceBuilder
 import com.example.ar_parcelsorting.service.ParcelServiceManager
 
-
 /**
 Similar to the idScannerFragment.kt
  */
@@ -42,6 +41,7 @@ class CodeScannerFragment : Fragment() {
     private lateinit var scannerView: CodeScannerView
 
     private lateinit var parcel : Parcel
+    private lateinit var parcelCode : String
 
     //Retrofit setup
     private lateinit var retrofitService: ParcelService // NOT NECESSARY ANYMORE but still in use
@@ -51,6 +51,7 @@ class CodeScannerFragment : Fragment() {
     private lateinit var viewModel: ParcelViewModel
 
     private var parcelHasBeenRecorded : Boolean = false
+    private var firstTimeScanParcel : Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,6 +74,8 @@ class CodeScannerFragment : Fragment() {
             scannerView.setFrameAspectRatio(1F,1F)
             binding.ibtnHorizontal.isInvisible = false
             binding.ibtnSquare.isInvisible = true
+            // TODO: remoeve this after finishing project
+            postBarcode("SPXMY0011", it)
         }
 
         initRetrofitInstance() // Create retrofit instance
@@ -92,9 +95,13 @@ class CodeScannerFragment : Fragment() {
 
         /// TODO: Remove this after finish the project
         /** To test whether POST rquest is workable? */
-        postBarcode("SPXMY0001", view)
+//        postBarcode("SPXMY0011", view)
+//        if (firstTimeScanParcel){
+//            postBarcode(parcelCode, view)
+//        }
 
     }
+
 
     // Create retrofit instance
     private fun initRetrofitInstance(){
@@ -114,45 +121,55 @@ class CodeScannerFragment : Fragment() {
 
     // Post request - send the scanned barcode to MongoDB in order to retrieve corresponding parcel information
     private fun postBarcode(parcel_code:String = "SPXMY0001" , view: View) {
-        var parcelBarcode = Parcel(
+        val parcelBarcode = Parcel(
             parcelCode = parcel_code
         )
 
         parcelServiceManager.postBarcode(parcelBarcode) { it ->
             if (it?.parcelCode != null) {
                 parcel = it
-                val parcelCode = it.parcelCode
+                parcelCode = it.parcelCode
+
 
                 // Data to transfer between fragment
                 val bundle = bundleOf(
-                    "parcelCode" to parcel.parcelCode,
+                    "parcelCode" to it.parcelCode,
+                    "parcelX" to it.parcelX.toString(),
+                    "parcelY" to it.parcelY.toString(),
+                    "parcelZ" to it.parcelZ.toString(),
+                    "parcelLength" to it.parcelLength.toString(),
+                    "parcelWidth" to it.parcelWidth.toString(),
+                    "parcelHeight" to it.parcelHeight.toString(),
+                    "parcelOrientation" to it.parcelOrientation.toString(),
                 )
 
-                Log.i("My","The bundel is ${bundle}")
 
                 /** To check parcel has been recorded inside the database before or not */
                 viewModel.parcels.observe(requireActivity()) {
                     it?.forEach {
-                        if (parcelCode == it.parcelCode){
+                        if (parcelCode == it.parcelCode){ //Check the scanned barcode map with any existing barcode in the database
                             parcelHasBeenRecorded = true
                             Log.i("My", "Enter parcelHasBeenRecorded loop")
                         }
                     }
                     if (parcelHasBeenRecorded){ // Parcel recorded before
-                        Toast.makeText(activity,"Duplicate parcel! ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity,"Navigate to AR View.", Toast.LENGTH_SHORT).show()
                         Log.i("My", "Duplicate parcel")
                         parcelHasBeenRecorded = false
                         // TODO: Move to ARFragment (havent test out can work or not
-                        view.findNavController().navigate(R.id.action_codeScannerFragment_to_ARFragment,bundle)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            view.findNavController().navigate(R.id.action_codeScannerFragment_to_ARFragment,bundle)
+                        }, 2000)
+
                     }
                     else{ //New parcel that do not store in database yet
                         Log.i("My", "Enter else loop")
                         saveParcelData(parcel) //save parcel information to database using ROOM
                         Toast.makeText(activity,"Parcel Recorded Successfully", Toast.LENGTH_SHORT).show()
 
-                        // TODO: Move to ARFragment (havent test out can work or not
-                        view.findNavController().navigate(R.id.action_codeScannerFragment_to_ARFragment,bundle)
-
+                        // TODO: A bug occur when we record new parcel into database. IllegalStateExecption will be triggered saying CodeScannerFragmemt does not navcontroller
+                        // However if we store it-> crash-> rescan and trigger duplicate parcel loop again, then everything work fine as usual..
+                        firstTimeScanParcel = true // Solution : To call the postBarcode() function again in order to navigate to Ar Fragment
                     }
                 }
 
@@ -170,19 +187,20 @@ class CodeScannerFragment : Fragment() {
      *
      * parcelResponse - response receive from Node-RED, which is the output of parcelServiceManager.postBarcode()
      * */
-
     private fun saveParcelData( parcelResponse : Parcel) {
+        Log.i("My","Enter saveParcelData loop")
         /* Save parcel data*/
         viewModel.insertParcel(
             ParcelDB(
-                0,
+                null,
                 parcelResponse.parcelCode,
                 parcelResponse.parcelX,
                 parcelResponse.parcelY,
                 parcelResponse.parcelZ,
                 parcelResponse.parcelLength,
                 parcelResponse.parcelHeight,
-                parcelResponse.parcelWidth
+                parcelResponse.parcelWidth,
+                parcelResponse.parcelOrientation,
             )
         )
     }
@@ -205,11 +223,10 @@ class CodeScannerFragment : Fragment() {
             // When barcode is detected
             decodeCallback = DecodeCallback {
                 activity.runOnUiThread {
-//                    Toast.makeText(activity,"Parcel ${it.text} has been recorded.", Toast.LENGTH_SHORT).show()
                     postBarcode(it.text,view) // Do post request to retrieve parcel information from MongoDB
-                    Handler().postDelayed({
+                    Handler(Looper.getMainLooper()).postDelayed({
                         scannerView.performClick() // To refresh the fragment for next scanning
-                    }, 5000)
+                    }, 2000)
 
                 }
             }

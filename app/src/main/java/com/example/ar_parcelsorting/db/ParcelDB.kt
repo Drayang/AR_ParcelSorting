@@ -23,5 +23,5 @@ data class ParcelDB(
     @ColumnInfo(name = "parcel_Length") var parcelLength: Int?,
     @ColumnInfo(name = "parcel_Height") var parcelHeight: Int?,
     @ColumnInfo(name = "parcel_Width") var parcelWidth: Int?,
-
+    @ColumnInfo(name = "parcel_orientation") var parcelOrientation: Int?,
     )

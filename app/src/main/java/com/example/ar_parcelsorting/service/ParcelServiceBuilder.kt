@@ -13,10 +13,13 @@ class ParcelServiceBuilder {
 //         val BASE_URL: String = "https://jsonplaceholder.typicode.com"
 
         /** To access localhost on my machine when using Android Emulator */
-        val BASE_URL = "http://10.0.2.2:1880"
+//        val BASE_URL = "http://10.0.2.2:1880"
 
         /** To access localhost on my machine when using Android Device -iponfig command: IPV4 address */
-//        val BASE_URL = "http://192.168.0.194:1880/"
+//        val BASE_URL = "http://10.156.50.255:1880/"
+        val BASE_URL = "http://192.168.68.103:1880/"
+//        val BASE_URL = "http://127.0.0.1:1880/"
+
 
 
         /*

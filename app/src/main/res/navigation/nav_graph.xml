@@ -41,7 +41,11 @@
         android:id="@+id/trackingFragment"
         android:name="com.example.ar_parcelsorting.TrackingFragment"
         android:label="fragment_tracking"
-        tools:layout="@layout/fragment_tracking" />
+        tools:layout="@layout/fragment_tracking" >
+        <action
+            android:id="@+id/action_trackingFragment_to_parcelListFragment"
+            app:destination="@id/parcelListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/idScannerFragment"
         android:name="com.example.ar_parcelsorting.IdScannerFragment"

@@ -26,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AR_ParceLSorting"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.ar.API_KEY"
+            android:value="AIzaSyDMQR89tdSycHuwJzlLOR84BRSxQVK3VRE"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

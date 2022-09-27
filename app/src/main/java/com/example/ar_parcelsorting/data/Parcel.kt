@@ -22,7 +22,7 @@ data class Parcel(
     @SerializedName("length") val parcelLength: Int? = 0,
     @SerializedName("height") val parcelHeight: Int? = 0,
     @SerializedName("width") val parcelWidth: Int? = 0,
-
+    @SerializedName("orientation") val parcelOrientation: Int? = 0
 )
 
 
