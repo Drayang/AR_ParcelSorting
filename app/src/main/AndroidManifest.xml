@@ -28,7 +28,7 @@
         tools:targetApi="31">
         <meta-data
             android:name="com.google.android.ar.API_KEY"
-            android:value="AIzaSyDMQR89tdSycHuwJzlLOR84BRSxQVK3VRE"/>
+            android:value=""/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
