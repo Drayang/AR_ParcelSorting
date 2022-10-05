@@ -93,6 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            android:background="@android:color/transparent"
             android:contextClickable="false"
             android:indeterminate="true"
             app:indicatorSize="64dp"

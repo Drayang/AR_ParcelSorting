@@ -25,13 +25,15 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/purple_500"></androidx.appcompat.widget.Toolbar>
 
             <ImageButton
                 android:id="@+id/btnHome"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
+                android:backgroundTint="@color/primary_color"
                 android:contentDescription="@string/home_button"
                 android:minHeight="48dp"
                 android:src="@drawable/ic_home" />
@@ -42,6 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center|right"
                 android:layout_marginRight="10dp"
+                android:background="@color/purple_500"
                 android:gravity="center|right"
                 android:text="Employee 1"
                 android:textColor="@color/white"

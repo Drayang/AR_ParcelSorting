@@ -79,29 +79,15 @@ class CodeScannerFragment : Fragment() {
         }
 
         initRetrofitInstance() // Create retrofit instance
-
         initROOM() // Create ROOM instance - dao, factory and viewModel
-
-
 
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         setupPermission() //Setup permission
         initCodeScanner(view) // Initialise the code scanner
-
-        /// TODO: Remove this after finish the project
-        /** To test whether POST rquest is workable? */
-//        postBarcode("SPXMY0011", view)
-//        if (firstTimeScanParcel){
-//            postBarcode(parcelCode, view)
-//        }
-
     }
-
 
     // Create retrofit instance
     private fun initRetrofitInstance(){
@@ -156,7 +142,6 @@ class CodeScannerFragment : Fragment() {
                         Toast.makeText(activity,"Navigate to AR View.", Toast.LENGTH_SHORT).show()
                         Log.i("My", "Duplicate parcel")
                         parcelHasBeenRecorded = false
-                        // TODO: Move to ARFragment (havent test out can work or not
                         Handler(Looper.getMainLooper()).postDelayed({
                             view.findNavController().navigate(R.id.action_codeScannerFragment_to_ARFragment,bundle)
                         }, 2000)
@@ -167,8 +152,8 @@ class CodeScannerFragment : Fragment() {
                         saveParcelData(parcel) //save parcel information to database using ROOM
                         Toast.makeText(activity,"Parcel Recorded Successfully", Toast.LENGTH_SHORT).show()
 
-                        // TODO: A bug occur when we record new parcel into database. IllegalStateExecption will be triggered saying CodeScannerFragmemt does not navcontroller
-                        // However if we store it-> crash-> rescan and trigger duplicate parcel loop again, then everything work fine as usual..
+                        /** A bug occur when we record new parcel into database. IllegalStateExecption will be triggereD
+                        However if we store it-> crash-> rescan and trigger duplicate parcel loop again, then everything work fine as usual*/
                         firstTimeScanParcel = true // Solution : To call the postBarcode() function again in order to navigate to Ar Fragment
                     }
                 }
