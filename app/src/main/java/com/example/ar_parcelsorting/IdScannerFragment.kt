@@ -18,8 +18,6 @@ import androidx.navigation.findNavController
 import com.budiyev.android.codescanner.*
 import com.example.ar_parcelsorting.databinding.FragmentIdScannerBinding
 
-//private const val CAMERA_REQUEST_CODE = 101
-
 class IdScannerFragment : Fragment() {
 
     private lateinit var binding : FragmentIdScannerBinding

@@ -23,7 +23,4 @@ class ParcelViewModel(private val dao: ParcelDao): ViewModel() {
         dao.deleteParcel(parcelDB)
     }
 
-
-
-
 }

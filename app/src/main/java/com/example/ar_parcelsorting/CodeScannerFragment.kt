@@ -74,8 +74,8 @@ class CodeScannerFragment : Fragment() {
             scannerView.setFrameAspectRatio(1F,1F)
             binding.ibtnHorizontal.isInvisible = false
             binding.ibtnSquare.isInvisible = true
-            // TODO: remoeve this after finishing project
-            postBarcode("SPXMY0011", it)
+            // TODO: remove this after finishing project
+            // postBarcode("SPXMY0011", it)
         }
 
         initRetrofitInstance() // Create retrofit instance
@@ -131,7 +131,7 @@ class CodeScannerFragment : Fragment() {
 
 
                 /** To check parcel has been recorded inside the database before or not */
-                viewModel.parcels.observe(requireActivity()) {
+                viewModel.parcels.observe(requireActivity()) { it ->
                     it?.forEach {
                         if (parcelCode == it.parcelCode){ //Check the scanned barcode map with any existing barcode in the database
                             parcelHasBeenRecorded = true

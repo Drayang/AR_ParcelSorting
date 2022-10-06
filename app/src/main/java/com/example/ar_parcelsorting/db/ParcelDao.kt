@@ -3,7 +3,6 @@ package com.example.ar_parcelsorting.db
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import androidx.room.DeleteTable as DeleteTable
 
 @Dao
 interface ParcelDao {

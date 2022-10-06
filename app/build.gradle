@@ -41,7 +41,7 @@ dependencies {
     // Retrofit dependency and gson converter dependency(found here https://square.github.io/retrofit/)
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    // Okthttp request dependency (https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
+    // Okhttp request dependency (https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
     implementation "com.squareup.okhttp3:logging-interceptor:4.10.0"
 
 

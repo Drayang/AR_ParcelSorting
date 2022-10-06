@@ -128,8 +128,7 @@ class TrackingFragment : Fragment() {
 
         }
 
-
-        retrievePrevFragmentInfo()
+        retrievePrevFragmentInfo() // Retrieve the information
 
         // To find the index of model in the list with the corresponding code
         modelIndex = findModelIndex(parcelCode)
@@ -144,19 +143,8 @@ class TrackingFragment : Fragment() {
                     Log.i("My","Enter Load model ")
                     loadModelNode()
                 }
-//                arFrame.camera.pose
-//                Log.i("MyTag","Enter onArFrame")
-//                Log.i("MyTag","Children are ${sceneView.children}")
-//                Log.i("MyTag","Children size are ${sceneView.children.size}")
-//                Log.i("MyTag","Added children name is ${children[children.size-1].name}")
-//                Log.i("MyTag","Added children scale is ${children[children.size-1].scale}")
-//                Log.i("MyTag","The hit test is ${arFrame.camera.pose}")
-//                children[children.size-1].isVisible = true
-
-                //TODO: can use name to set other armodel invisible when we want to track the ArModel.
             }
         }
-
 
         // Inflate the layout for this fragment
         return binding.root

@@ -10,8 +10,7 @@ import com.google.gson.annotations.SerializedName
  * 3. node-red "Retrieve XYZ data for response" node
  *
  */
-
-//SerializedName annotation tell the API the name of the property API only recognize the @SerializedName 's value
+// SerializedName annotation tell the API the name of the property API only recognize the @SerializedName 's value
 // val xxx -> xxx is the variable name we can access in AS
 data class Parcel(
 //    //@SerializedName("json key") val variable_name : type
@@ -23,23 +22,6 @@ data class Parcel(
     @SerializedName("height") val parcelHeight: Int? = 0,
     @SerializedName("width") val parcelWidth: Int? = 0,
     @SerializedName("orientation") val parcelOrientation: Int? = 0
-)
-
-
-
-/*
-TODO: This class is to test the RetrofitDemo - "Albumitems" class only, after testing should
- change all the "ParcelTesting" to "Parcel"
-*/
-data class ParcelTesting(
-    /**
-     * Testing only */
-    @SerializedName("id")
-    val id: Int,
-    @SerializedName("title")
-    val title: String,
-    @SerializedName("userId")
-    val userId: Int
 )
 
 

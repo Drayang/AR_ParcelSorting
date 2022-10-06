@@ -3,11 +3,8 @@ package com.example.ar_parcelsorting.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-
 
 /** Duplicate of Parcel data class, specifically made for data storing using ROOM jetpack
- *  Can check the stored data under ........
  * */
 @Entity(tableName = "parcel_data_table")
 data class ParcelDB(

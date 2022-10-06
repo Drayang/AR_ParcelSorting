@@ -27,8 +27,6 @@ class ParcelListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
-
-
         }
     }
 

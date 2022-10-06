@@ -56,7 +56,6 @@ class ARFragment : Fragment() {
     private var parcelWidth = 0.0f
 
 
-
     /** Regex to obtain the name of the model [No needed anymore]*/
     private val pattern = Regex("model/(.+).glb")
     private val matchResult = pattern.find("model/parcelSPXMY0011.glb") //example only
@@ -111,7 +110,7 @@ class ARFragment : Fragment() {
 
         binding = FragmentARBinding.inflate(inflater,container,false)
 
-        //Intialise the view
+        //Initialise the view
         sceneView = binding.sceneView
         loadingView = binding.loadingView
 
@@ -267,10 +266,10 @@ class ARFragment : Fragment() {
     }
 
     /** Detect the desired images (i.e. markers in our case) and define the consequence operation
-     * Note: only 1 marker is used!!*/
+     * Note: only 1 marker is used now!!*/
     private fun onAugmentedImageTrackingUpdate(augmentedImage :AugmentedImage ) {
         // If all marker have been detected, stop scanning augmented image to save CPU usage
-        if (aruco_0_Detected && !all_marker_Detected){ //TODO: remember add in other arucodetected!
+        if (aruco_0_Detected && !all_marker_Detected){
             all_marker_Detected = true
             isLoading = false
             btnDisplay.isGone = true // Remove the button

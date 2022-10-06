@@ -2,7 +2,6 @@ package com.example.ar_parcelsorting.service
 
 import android.util.Log
 import com.example.ar_parcelsorting.data.Parcel
-import com.example.ar_parcelsorting.data.ParcelTesting
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,8 +33,4 @@ class ParcelServiceManager {
         )
     }
 
-    /** FOR TESTING ONLY*/
-    suspend fun getAlbum(id: Int): Response<ParcelTesting> {
-        return retrofitService.getAlbum(3)
-    }
 }

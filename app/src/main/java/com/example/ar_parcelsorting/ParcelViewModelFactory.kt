@@ -5,13 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.ar_parcelsorting.db.ParcelDao
 import java.lang.IllegalArgumentException
 
-/* This is like ViewModel Provider similar to the ViewModelDemo project that we
-* call something like this
-* "viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)"
-* in the "mainactivity.kt"
-* THis is a can copy paste class
-* */
-
 class ParcelViewModelFactory(
     private val dao: ParcelDao
 ):ViewModelProvider.Factory {
